@@ -6,26 +6,37 @@ declare module "react-piano" {
     fromNote: (MidiString) => MidiNumber;
   };
 
-  type KeyboardConfig = Array<{ natural: string; flat: string; sharp: string }>;
+  export type KeyboardConfig = Array<{
+    natural: string;
+    flat: string;
+    sharp: string;
+  }>;
+  export interface KeyboardShortcut {
+    key: string;
+    midiNumber: MidiNumber;
+  }
 
   export const KeyboardShortcuts: {
     create: ({
       firstNote: MidiNumber,
       lastNote: MidiNumber,
       keyboardConfig: KeyboardConfig
-    }) => void;
+    }) => KeyboardShortcut[];
     BOTTOM_ROW: KeyboardConfig;
     HOME_ROW: KeyboardConfig;
     QWERTY_ROW: KeyboardConfig;
   };
 
+  export type MidiNoteConsumer = (midiNumber: MidiNumber) => void;
+
   export interface PianoProps {
     disabled: boolean;
     noteRange: { first: MidiNumber; last: MidiNumber };
-    playNote: (midiString: MidiString) => void;
-    stopNote: (midiString: MidiString) => void;
+    playNote: MidiNoteConsumer;
+    stopNote: MidiNoteConsumer;
     width: number;
-    keyboardShortcuts: ReturnType<typeof KeyboardShortcuts["create"]>;
+    keyboardShortcuts: KeyboardShortcut[];
+    activeNotes?: Array<MidiNumber>;
   }
 
   export class Piano extends React.Component<PianoProps> {}

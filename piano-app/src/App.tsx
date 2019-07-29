@@ -1,12 +1,12 @@
-import React from 'react';
-import './App.css';
-import Piano from "./Piano";
+import React from "react";
+import "./App.css";
+import { Stage } from "./Stage";
 
 function App() {
   return (
     <div className="App">
-      <h1>React Piano Task</h1>
-      <Piano />
+      <h1>React Piano Recorder</h1>
+      <Stage />
     </div>
   );
 }
