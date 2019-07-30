@@ -1,11 +1,11 @@
 import React from "react";
 import { MidiNoteConsumer } from "react-piano";
-import { MidiSender } from "./types";
-import { MidiPressEvent, MidiEvent, Recording } from "./types";
-import { secondsToClock } from "./utils";
 import { FaStop, FaCircle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Jumbotron from "react-bootstrap/Jumbotron";
+
+import { MidiSender, MidiPressEvent, MidiEvent, Recording } from "./@types";
+import { secondsToClock } from "./utils";
 
 interface RecorderProps {
   midiIn: MidiSender;
@@ -180,7 +180,6 @@ export class Recorder extends React.Component<RecorderProps, RecorderState> {
             You can resample your recordings by playing them while recoding.
           </p>
         </Jumbotron>
-        {/* <div>{JSON.stringify(this.state)}</div> */}
       </div>
     );
   }

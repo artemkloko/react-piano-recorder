@@ -1,33 +1,37 @@
 import React, { ReactNode } from "react";
-import { RecordingForm } from "./RecordingForm";
-import { LibraryRecording } from "./LibraryRecording";
-import { Recording, MidiEvent } from "../types";
 import ListGroup from "react-bootstrap/ListGroup";
-import { compose, graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { Query } from "react-apollo";
 
-interface LibraryProps {
+import { Recording, MidiEvent } from "../@types";
+import RecordingForm from "./RecordingForm";
+import { LibraryRecording } from "./LibraryRecording";
+
+import { GetRecordingsQuery } from "../@types/graphql";
+import { GET_RECORDINGS } from "./queries";
+
+type RenderProps = {
+  addRecording: (recording: Recording) => void;
+};
+
+type LibraryProps = {
   onPlay: (events: MidiEvent[]) => void;
   onStop: () => void;
   isPlaying: boolean;
   render: (renderProps: RenderProps) => ReactNode;
-}
+  recordings?: Recording[];
+};
 
-interface LibraryState {
+type LibraryState = {
   recordings: Recording[];
   currentlyPlaying: Recording | null;
   newRecording: Recording | null;
-}
+};
 
-interface RenderProps {
-  addRecording: (recording: Recording) => void;
-}
-
-class Library extends React.Component<LibraryProps, LibraryState> {
+export class Library extends React.Component<LibraryProps, LibraryState> {
   constructor(props: LibraryProps) {
     super(props);
     this.state = {
-      recordings: [],
+      recordings: props.recordings || [],
       currentlyPlaying: null,
       newRecording: null
     };
@@ -103,18 +107,20 @@ class Library extends React.Component<LibraryProps, LibraryState> {
   }
 }
 
-const getRecordings = gql`
-  {
-    recordings {
-      id
-      breed
-    }
-  }
-`;
+export const LibraryWithQuery = (props: LibraryProps) => {
+  return (
+    <Query<GetRecordingsQuery> query={GET_RECORDINGS}>
+      {({ loading, error, data }) => {
+        if (loading) return "Loading...";
+        if (error) return `Error! ${error.message}`;
+        if (data && data.recordings) {
+          return (
+            <Library {...props} recordings={data.recordings as Recording[]} />
+          );
+        }
+      }}
+    </Query>
+  );
+};
 
-const enhancedComponent = compose(
-  graphql(getRecordings)
-  // renderWhileLoading(LoadingPlaceholder, "user")
-)(Library);
-
-export default enhancedComponent;
+export default LibraryWithQuery;

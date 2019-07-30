@@ -1,7 +1,8 @@
 import React, { ReactNode } from "react";
 import { MidiNoteConsumer } from "react-piano";
 import "react-piano/dist/styles.css";
-import { MidiSender, MidiReceiver } from "./types";
+
+import { MidiSender, MidiReceiver } from "./@types";
 
 type AddMidiIn = (name: string) => MidiSender;
 type AddMidiOut = (deviceNames: string[]) => MidiReceiver;

@@ -1,12 +1,17 @@
 import React from "react";
+import { Mutation } from "react-apollo";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import { Recording } from "../types";
-import { FormControlProps } from "react-bootstrap/FormControl";
-
+import FormControl, { FormControlProps } from "react-bootstrap/FormControl";
 import "bootstrap/dist/css/bootstrap.css";
+
+import { Recording } from "../@types";
+import {
+  AddRecordingMutation,
+  AddRecordingMutationVariables
+} from "../@types/graphql";
+import { ADD_RECORDING } from "./queries";
 
 interface RecordingFormProps {
   recording: Recording;
@@ -78,4 +83,24 @@ export class RecordingForm extends React.Component<
   }
 }
 
-export default RecordingForm;
+export const RecordingFormWithQuery = (props: RecordingFormProps) => {
+  return (
+    <Mutation<AddRecordingMutation, AddRecordingMutationVariables>
+      mutation={ADD_RECORDING}
+    >
+      {(addRecording, { data }) => (
+        <RecordingForm
+          {...props}
+          onConfirm={recording => {
+            addRecording({
+              variables: { recording } as AddRecordingMutationVariables
+            });
+            props.onConfirm(recording);
+          }}
+        />
+      )}
+    </Mutation>
+  );
+};
+
+export default RecordingFormWithQuery;

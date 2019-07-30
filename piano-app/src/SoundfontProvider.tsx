@@ -1,7 +1,8 @@
 import React from "react";
 import SoundfontPlayer from "soundfont-player";
 import { MidiNoteConsumer } from "react-piano";
-import { MidiSender } from "./types";
+
+import { MidiSender } from "./@types";
 
 enum Format {
   "mp3",

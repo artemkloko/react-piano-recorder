@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import { MidiReceiver } from "./types";
 import { MidiNoteConsumer } from "react-piano";
-import { MidiPressEvent, MidiEvent } from "./types";
+
+import { MidiReceiver, MidiPressEvent, MidiEvent } from "./@types";
 
 interface PlayerProps {
   midiOut: MidiReceiver;
@@ -65,7 +65,7 @@ export class Player extends React.Component<PlayerProps, PlayerState> {
   };
 
   play: RenderProps["play"] = recording => {
-    this.props.midiOut.stopAllNotes()
+    this.props.midiOut.stopAllNotes();
     const currentTime = this.props.audioContext.currentTime;
     const schedule = recording
       .reduce(

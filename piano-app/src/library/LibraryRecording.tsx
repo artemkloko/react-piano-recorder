@@ -1,8 +1,9 @@
 import React from "react";
-import { Recording } from "../types";
-import { secondsToClock } from "../utils";
 import { FaPlay, FaStop } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
+
+import { Recording } from "../@types";
+import { secondsToClock } from "../utils";
 
 interface LibraryRecordingProps {
   recording: Recording;

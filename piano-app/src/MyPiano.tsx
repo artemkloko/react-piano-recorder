@@ -6,7 +6,8 @@ import {
   MidiNumber,
   MidiNoteConsumer
 } from "react-piano";
-import { MidiReceiver, MidiSender } from "./types";
+
+import { MidiReceiver, MidiSender } from "./@types";
 
 const noteRange = {
   first: MidiNumbers.fromNote("c3"),
