@@ -7,13 +7,13 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import { MidiSender, MidiPressEvent, MidiEvent, Recording } from "./@types";
 import { secondsToClock } from "./utils";
 
-interface RecorderProps {
+export type RecorderProps = {
   midiIn: MidiSender;
   audioContext: AudioContext;
   onStopRecording?: (recording: Recording) => void;
-}
+};
 
-interface RecorderState {
+export type RecorderState = {
   isRecording: boolean;
   start: number;
   displayDuration: number;
@@ -22,7 +22,7 @@ interface RecorderState {
   };
   recording: Recording | null;
   clock: NodeJS.Timeout;
-}
+};
 
 export class Recorder extends React.Component<RecorderProps, RecorderState> {
   constructor(props: RecorderProps) {
@@ -75,19 +75,22 @@ export class Recorder extends React.Component<RecorderProps, RecorderState> {
   stopNote: MidiNoteConsumer = midiNumber => {
     this.setState(currentState => {
       let { isRecording, start, stillPressed, recording } = currentState;
-
+      const currentTime = this.props.audioContext.currentTime;
       if (isRecording && recording !== null) {
         recording = {
           ...recording,
           events: [
             ...recording.events,
-            this.midiPressEventToMidiEvent(stillPressed[midiNumber], start)
+            this.midiPressEventToMidiEvent(
+              stillPressed[midiNumber],
+              currentTime,
+              start
+            )
           ]
         };
       }
 
       delete stillPressed[midiNumber];
-
       return {
         stillPressed,
         recording
@@ -98,8 +101,13 @@ export class Recorder extends React.Component<RecorderProps, RecorderState> {
   stopAllNotes = () => {
     this.setState(currentState => {
       let { start, stillPressed, recording } = { ...currentState };
+      const currentTime = this.props.audioContext.currentTime;
       const pressedEvents = Object.keys(stillPressed).map(midiNumber =>
-        this.midiPressEventToMidiEvent(stillPressed[midiNumber], start)
+        this.midiPressEventToMidiEvent(
+          stillPressed[midiNumber],
+          currentTime,
+          start
+        )
       );
       if (recording !== null) {
         recording = {
@@ -115,13 +123,14 @@ export class Recorder extends React.Component<RecorderProps, RecorderState> {
 
   midiPressEventToMidiEvent = (
     midiPressEvent: MidiPressEvent,
+    currentTime: number,
     start: RecorderState["start"]
   ): MidiEvent => {
     const time =
       midiPressEvent.absoluteTime >= start
         ? midiPressEvent.absoluteTime - start
         : 0;
-    const duration = this.props.audioContext.currentTime - start - time;
+    const duration = currentTime - start - time;
     return {
       note: midiPressEvent.note,
       time: time,
