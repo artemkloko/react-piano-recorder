@@ -5,12 +5,12 @@ import Button from "react-bootstrap/Button";
 import { Recording } from "../@types";
 import { secondsToClock } from "../utils";
 
-interface LibraryRecordingProps {
+type LibraryRecordingProps = {
   recording: Recording;
   isPlaying: boolean;
   play: (recording: Recording) => void;
   stop: () => void;
-}
+};
 
 export class LibraryRecording extends React.Component<LibraryRecordingProps> {
   play = () => {

@@ -3,13 +3,13 @@ import { MidiNoteConsumer } from "react-piano";
 
 import { MidiReceiver, MidiPressEvent, MidiEvent } from "./@types";
 
-interface PlayerProps {
+export type PlayerProps = {
   midiOut: MidiReceiver;
   audioContext: AudioContext;
   render: (renderProps: RenderProps) => ReactNode;
-}
+};
 
-interface PlayerState {
+export type PlayerState = {
   isPlaying: boolean;
   schedule: Array<
     MidiPressEvent & {
@@ -17,13 +17,13 @@ interface PlayerState {
     }
   >;
   clock: NodeJS.Timeout;
-}
+};
 
-interface RenderProps {
+type RenderProps = {
   play: (events: MidiEvent[]) => void;
   stop: () => void;
   isPlaying: boolean;
-}
+};
 
 export class Player extends React.Component<PlayerProps, PlayerState> {
   constructor(props: PlayerProps) {

@@ -7,19 +7,19 @@ import { MidiSender, MidiReceiver } from "./@types";
 type AddMidiIn = (name: string) => MidiSender;
 type AddMidiOut = (deviceNames: string[]) => MidiReceiver;
 
-interface Props {
+type Props = {
   render: (renderProps: RenderProps) => ReactNode;
-}
+};
 
-interface State {
+type State = {
   receivers: { [name: string]: MidiReceiver };
   senders: { [name: string]: MidiReceiver };
-}
+};
 
-interface RenderProps {
+type RenderProps = {
   addMidiIn: AddMidiIn;
   addMidiOut: AddMidiOut;
-}
+};
 
 export class MidiRouter extends React.Component<Props, State> {
   constructor(props: Props) {

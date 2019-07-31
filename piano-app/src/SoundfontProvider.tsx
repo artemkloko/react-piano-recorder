@@ -14,28 +14,28 @@ enum Soundfont {
   "FluidR3_GM"
 }
 
-interface OwnProps {
+type OwnProps = {
   instrumentName: SoundfontPlayer.InstrumentName;
   hostname?: string;
   format?: Format;
   soundfont?: Soundfont;
   audioContext: AudioContext;
   midiIn: MidiSender;
-}
+};
 
-interface State {
+type State = {
   activeAudioNodes: {
     [key: string]: SoundfontPlayer.Player;
   };
   instrument: SoundfontPlayer.Player | null;
-}
+};
 
 class SoundfontProvider extends React.Component<OwnProps, State> {
   static defaultProps = {
     format: "mp3",
     soundfont: "MusyngKite",
     instrumentName: "acoustic_grand_piano",
-    hostname: "http://gleitz.github.io/midi-js-soundfonts"
+    hostname: "https://d1pzp51pvbm36p.cloudfront.net"
   };
 
   constructor(props: OwnProps) {

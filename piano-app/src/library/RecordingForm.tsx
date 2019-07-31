@@ -13,15 +13,15 @@ import {
 } from "../@types/graphql";
 import { ADD_RECORDING } from "./queries";
 
-interface RecordingFormProps {
+type RecordingFormProps = {
   recording: Recording;
   onConfirm: (recording: Recording) => void;
   onCancel: () => void;
-}
+};
 
-interface RecordingFormState {
+type RecordingFormState = {
   title: string;
-}
+};
 
 export class RecordingForm extends React.Component<
   RecordingFormProps,
