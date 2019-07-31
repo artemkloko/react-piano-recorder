@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Piano,
+  Piano as ReactPiano,
   MidiNumbers,
   KeyboardShortcuts,
   MidiNumber,
@@ -20,17 +20,17 @@ const keyboardShortcuts = KeyboardShortcuts.create({
   keyboardConfig: KeyboardShortcuts.HOME_ROW
 });
 
-interface MyPianoProps {
+export type PianoProps = {
   midiOut: MidiReceiver;
   midiIn: MidiSender;
-}
+};
 
-interface MyPianoState {
+export type PianoState = {
   activeNotes: MidiNumber[];
-}
+};
 
-export class MyPiano extends React.Component<MyPianoProps, MyPianoState> {
-  constructor(props: MyPianoProps) {
+export class Piano extends React.Component<PianoProps, PianoState> {
+  constructor(props: PianoProps) {
     super(props);
     this.state = {
       activeNotes: []
@@ -68,7 +68,7 @@ export class MyPiano extends React.Component<MyPianoProps, MyPianoState> {
 
   render() {
     return (
-      <Piano
+      <ReactPiano
         disabled={false}
         noteRange={noteRange}
         playNote={this.props.midiOut.playNote}
@@ -81,4 +81,4 @@ export class MyPiano extends React.Component<MyPianoProps, MyPianoState> {
   }
 }
 
-export default MyPiano;
+export default Piano;

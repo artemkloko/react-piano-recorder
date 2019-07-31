@@ -3,7 +3,7 @@ import React from "react";
 import MidiRouter from "./MidiRouter";
 import SoundfontProvider from "./SoundfontProvider";
 import Recorder from "./Recorder";
-import MyPiano from "./MyPiano";
+import Piano from "./Piano";
 import Player from "./Player";
 import Library from "./library";
 
@@ -20,7 +20,7 @@ export class Stage extends React.Component {
               audioContext={audioContext}
               midiIn={addMidiIn("soundfont")}
             />
-            <MyPiano
+            <Piano
               midiIn={addMidiIn("piano")}
               midiOut={addMidiOut(["soundfont", "recorder"])}
             />
