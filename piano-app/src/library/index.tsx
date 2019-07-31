@@ -114,10 +114,9 @@ export const LibraryWithQuery = (props: LibraryProps) => {
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
         if (data && data.recordings) {
-          return (
-            <Library {...props} recordings={data.recordings as Recording[]} />
-          );
+          props.recordings = data.recordings as Recording[];
         }
+        return <Library {...props} />;
       }}
     </Query>
   );
