@@ -12,6 +12,7 @@
   "dependencies": {
     "apollo-server": "^2.7.1",
     "graphql": "^0.13.2",
+    "merge-graphql-schemas": "^1.6.2-3705b28.0",
     "mongodb": "^3.3.0-beta2"
   },
   "devDependencies": {

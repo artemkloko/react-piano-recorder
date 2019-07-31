@@ -1,0 +1,44 @@
+# query types
+
+scalar DateTime
+
+type MidiEvent {
+  note: Int!
+  time: Float!
+  duration: Float!
+}
+
+type Recording {
+  _id: ID!
+  createdAt: DateTime!
+  events: [MidiEvent!]!
+  duration: Float!
+  title: String!
+}
+
+# queries
+
+type Query {
+  recordings: [Recording]
+}
+
+# mutation types
+
+input InputMidiEvent {
+  note: Int!
+  time: Float!
+  duration: Float!
+}
+
+input InputRecording {
+  createdAt: DateTime!
+  events: [InputMidiEvent!]!
+  duration: Float!
+  title: String!
+}
+
+# mutations
+
+type Mutation {
+  addRecording(recording: InputRecording): Recording
+}
