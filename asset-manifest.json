@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/react-piano-recorder/static/css/main.a09defc4.chunk.css",
+    "main.js": "/react-piano-recorder/static/js/main.f2494b70.chunk.js",
+    "main.js.map": "/react-piano-recorder/static/js/main.f2494b70.chunk.js.map",
+    "runtime~main.js": "/react-piano-recorder/static/js/runtime~main.c5260f29.js",
+    "runtime~main.js.map": "/react-piano-recorder/static/js/runtime~main.c5260f29.js.map",
+    "static/css/2.569cb674.chunk.css": "/react-piano-recorder/static/css/2.569cb674.chunk.css",
+    "static/js/2.d63408c7.chunk.js": "/react-piano-recorder/static/js/2.d63408c7.chunk.js",
+    "static/js/2.d63408c7.chunk.js.map": "/react-piano-recorder/static/js/2.d63408c7.chunk.js.map",
+    "index.html": "/react-piano-recorder/index.html",
+    "precache-manifest.e1ff7461c5898703e59c2db6380fde94.js": "/react-piano-recorder/precache-manifest.e1ff7461c5898703e59c2db6380fde94.js",
+    "service-worker.js": "/react-piano-recorder/service-worker.js",
+    "static/css/2.569cb674.chunk.css.map": "/react-piano-recorder/static/css/2.569cb674.chunk.css.map",
+    "static/css/main.a09defc4.chunk.css.map": "/react-piano-recorder/static/css/main.a09defc4.chunk.css.map"
+  }
+}
